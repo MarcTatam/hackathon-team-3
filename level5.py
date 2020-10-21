@@ -1,4 +1,5 @@
 ##roman numerals to arabic
+""" Hackathon - Level 5 """
 
 def R2A(char):
     if char ==  'M':
@@ -15,8 +16,8 @@ def R2A(char):
         return 5
     elif char == 'I':
         return 1
-
-def convert(roman):
+        
+def convert(numeral):
     total = 0
     listroman = list(roman)
     for i in range(0,len(listroman)):
@@ -30,4 +31,8 @@ def convert(roman):
             pass
     return total
 
-print(convert('MCXLV'))
+if __name__ == '__main__':
+    # Add any code to test your solution here
+    # As per the example, this should return 1145
+    print(convert('MCXLV'))
+
