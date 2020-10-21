@@ -10,17 +10,13 @@ def add_task(task,description):
     global json_tasks
     id_counter += 1
     tasks[id_counter] = [task, description]
-    print(f'writing {tasks} to file...')
     json_file.write(json.dumps(tasks))
 
-def delete_task(task):
+def delete_task(task_id):
     json_file = open('tasks.json','w')
-    for i in range(1,len(tasks)+1):
-        if tasks[i][0] == task:
-            tasks.pop(i)
-    print(f'writing {tasks} to json file...')
+    tasks.pop(task_id)
     json_file.write(json.dumps(tasks))
-        
+
 
 def read_tasks():
     return tasks
