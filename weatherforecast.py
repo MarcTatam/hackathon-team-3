@@ -1,9 +1,13 @@
 import requests
 import json
 def kelvin_to_celsius(kelvin:int)->int:
+    '''Converts the arguement kelvin to celsius'''
     return kelvin - 273.15
 def config_reader()->dict:
-    """ Reads config.txt for api keys"""
+    ''' Reads config.txt for api keys
+    Note marker will have to add their own openweathermap api key to config.json
+    
+    '''
     try:
         config = open("config.json", "r")
     except OSError:
@@ -13,7 +17,7 @@ def config_reader()->dict:
     return keys
 
 def weather_request_forecast()->dict:
-    """gets weather data from weather api. Works as of 21/10/2020"""
+    '''gets weather data from weather api. Works as of 21/10/2020'''
     keys = config_reader()
     try:
         forecast = requests.get('http://api.openweathermap.org/data/2.5/forecast?id=7290675&APPID={}'.format(keys["weather_key"]))
@@ -31,6 +35,7 @@ weather_interested = [forecast_weather['list'][0]["main"]["temp"],forecast_weath
 #print(weather_interested)
 
 def temp_assessment(temp:float)->str:
+    '''Assesses the temperature and outputs a relevant string on what to wear'''
     if temp < 0:
         return "It's very cold, I'd wear lots of clothing"
     elif 0 < temp and temp <= 10:
@@ -41,6 +46,7 @@ def temp_assessment(temp:float)->str:
         return "It's very warm, you should be fine in a t-shirt"
 
 def rain_assessment(rain: float)->str:
+    '''Assesses the expected rainfall and whether to brina coat or not'''
     if rain == 0:
         return "No rain forecast"
     elif 0 < rain and rain < 3:
@@ -53,6 +59,7 @@ def rain_assessment(rain: float)->str:
         return "Very heavy rain expected, is it worth going?"
 
 def what_to_wear(weather:list)->str:
+    '''outputs whether or not one should wear a coat'''
     return_string = "Forecast weather is: "
     temp = kelvin_to_celsius(float(weather[0]))
     temp_low = kelvin_to_celsius(float(weather[1]))
@@ -64,5 +71,7 @@ def what_to_wear(weather:list)->str:
     return_string = return_string + temp_assessment(temp) + "\n"
     return_string = return_string + rain_assessment(rain)
     return return_string
-print(what_to_wear(weather_interested))
+
+if __name__ == "__main__":
+    print(what_to_wear(weather_interested))
     
