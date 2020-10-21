@@ -1,10 +1,14 @@
+<<<<<<< Updated upstream
 import json
 
+=======
+>>>>>>> Stashed changes
 tasks = {}
 id_counter = 0
 
 def add_task(task,description):
     global id_counter
+<<<<<<< Updated upstream
     global json_tasks
     id_counter += 1
     tasks[id_counter] = [task, description]
@@ -22,3 +26,15 @@ def read_tasks():
 
 add_task('hello','goodbye')
 print(json_tasks)
+=======
+    id_counter += 1
+    tasks[id_counter] = [task, description]
+
+def delete_task(task):
+    for i in range(1,len(tasks)+1):
+        if tasks[i][0] == task:
+            tasks.pop(i)
+
+def read_tasks():
+    return tasks
+>>>>>>> Stashed changes
